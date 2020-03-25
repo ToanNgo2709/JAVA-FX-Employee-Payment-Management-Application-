@@ -2,34 +2,37 @@ package application;
 	
 
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
+import java.awt.event.ActionEvent;
+
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class Main extends Application {
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			Pane P = new Pane();
-			Scene scene = new Scene(P,200,200);
-			Button b = new Button();
-			b.setLayoutX(100);
-			b.setLayoutY(100);
-			b.setText("HELLO");
-			P.getChildren().add(b);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		
+			Parent root = FXMLLoader.load(getClass().getResource("Myscene.fxml"));
+			
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("hello");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+	}
+	@FXML 
+	private void clickHere(ActionEvent event)
+	{
+		System.out.println("HEllo Toàn");
+	}
+
+
 }
