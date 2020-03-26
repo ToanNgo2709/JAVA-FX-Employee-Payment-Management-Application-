@@ -3,46 +3,40 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.FORM.employeeUIController">
    <children>
-      <AnchorPane layoutY="7.0" prefHeight="32.0" prefWidth="600.0">
-         <children>
-            <MenuBar layoutY="2.0">
-              <menus>
+      <MenuBar fx:id="myMenubar">
+        <menus>
                 <Menu mnemonicParsing="false" text="New">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Personal Infomation" />
+                    <MenuItem fx:id="mnitPersonInfo" mnemonicParsing="false" onAction="#openPersonInfo" text="Personal Infomation" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="TimeSheet">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Add work" />
-                        <MenuItem mnemonicParsing="false" text="Manager work" />
+                    <MenuItem fx:id="mnitAddWork" mnemonicParsing="false" text="Add work" />
+                        <MenuItem fx:id="mnitManagerWork" mnemonicParsing="false" text="Manager work" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Leave">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Add Leave" />
-                        <MenuItem mnemonicParsing="false" text="Manager Leave" />
+                    <MenuItem fx:id="mnitAddLeave" mnemonicParsing="false" text="Add Leave" />
+                        <MenuItem fx:id="mnitManagerLeave" mnemonicParsing="false" text="Manager Leave" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Payment">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="See Payment" />
+                        <MenuItem fx:id="mnitSeePayment" mnemonicParsing="false" text="See Payment" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Misc">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Change Password" />
-                        <MenuItem mnemonicParsing="false" text="Sign out" />
+                        <MenuItem fx:id="mnitSignout" mnemonicParsing="false" onAction="#openPersonInfo" text="Sign out" />
                      </items>
                   </Menu>
               </menus>
-            </MenuBar>
-         </children>
-      </AnchorPane>
+      </MenuBar>
    </children>
-</AnchorPane>
+</VBox>

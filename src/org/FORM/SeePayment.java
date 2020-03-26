@@ -4,24 +4,24 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Login extends Application {
+public class SeePayment extends Application {
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("loginForm.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("SeePaymentForm.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("Employee Payment Management Application");
-			primaryStage.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
 			primaryStage.setScene(scene);
 			primaryStage.show();
-
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+	}
+
+	public static void main(String[] args) {
+		launch(args);
 	}
 }
