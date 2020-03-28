@@ -23,7 +23,6 @@
       <TextField fx:id="tfEmployeeID" layoutX="115.0" layoutY="28.0" />
       <TextField fx:id="tfName" layoutX="97.0" layoutY="67.0" prefHeight="25.0" prefWidth="165.0" />
       <TextField fx:id="tfUsername" layoutX="97.0" layoutY="104.0" prefHeight="25.0" prefWidth="165.0" />
-      <PasswordField layoutX="97.0" layoutY="143.0" prefHeight="25.0" prefWidth="165.0" />
       <DatePicker fx:id="DOB" layoutX="103.0" layoutY="187.0" />
       <TextArea fx:id="taPerAdd" layoutX="140.0" layoutY="227.0" prefHeight="45.0" prefWidth="200.0" />
       <TextArea fx:id="taCurAdd" layoutX="140.0" layoutY="286.0" prefHeight="45.0" prefWidth="200.0" />
@@ -34,6 +33,6 @@
       <Label fx:id="lblImagePath" layoutX="409.0" layoutY="364.0" prefHeight="17.0" prefWidth="182.0" text="Image path" />
       <Button fx:id="btnUpload" layoutX="173.0" layoutY="433.0" mnemonicParsing="false" onAction="#uploadPersonalInfo" prefHeight="25.0" prefWidth="119.0" text="Upload" />
       <Button fx:id="btnCancel" layoutX="321.0" layoutY="433.0" mnemonicParsing="false" onAction="#cancelWindow" text="Cancel" />
-      <PasswordField fx:id="pfPW" layoutX="100.0" layoutY="143.0" />
+      <PasswordField fx:id="pfPW" layoutX="99.0" layoutY="143.0" prefHeight="25.0" prefWidth="165.0" />
    </children>
 </AnchorPane>

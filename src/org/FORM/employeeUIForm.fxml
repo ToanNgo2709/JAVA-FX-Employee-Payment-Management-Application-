@@ -16,24 +16,24 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="TimeSheet">
                   <items>
-                    <MenuItem fx:id="mnitAddWork" mnemonicParsing="false" text="Add work" />
-                        <MenuItem fx:id="mnitManagerWork" mnemonicParsing="false" text="Manager work" />
+                    <MenuItem fx:id="mnitAddWork" mnemonicParsing="false" onAction="#openAddWork" text="Add work" />
+                        <MenuItem fx:id="mnitManagerWork" mnemonicParsing="false" onAction="#openManagerWork" text="Manager work" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Leave">
                   <items>
-                    <MenuItem fx:id="mnitAddLeave" mnemonicParsing="false" text="Add Leave" />
-                        <MenuItem fx:id="mnitManagerLeave" mnemonicParsing="false" text="Manager Leave" />
+                    <MenuItem fx:id="mnitAddLeave" mnemonicParsing="false" onAction="#openAddLeave" text="Add Leave" />
+                        <MenuItem fx:id="mnitManagerLeave" mnemonicParsing="false" onAction="#openManagerLeave" text="Manager Leave" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Payment">
                      <items>
-                        <MenuItem fx:id="mnitSeePayment" mnemonicParsing="false" text="See Payment" />
+                        <MenuItem fx:id="mnitSeePayment" mnemonicParsing="false" onAction="#openSeePayment" text="See Payment" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Misc">
                      <items>
-                        <MenuItem fx:id="mnitSignout" mnemonicParsing="false" onAction="#openPersonInfo" text="Sign out" />
+                        <MenuItem fx:id="mnitSignout" mnemonicParsing="false" onAction="#signOut" text="Sign out" />
                      </items>
                   </Menu>
               </menus>

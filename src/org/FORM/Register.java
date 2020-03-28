@@ -18,11 +18,11 @@ public class Register {
 			primaryStage.setTitle("Register");
 			primaryStage.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
 			primaryStage.show();
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 }

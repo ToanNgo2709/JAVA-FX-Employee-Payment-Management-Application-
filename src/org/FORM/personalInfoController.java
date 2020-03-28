@@ -1,5 +1,8 @@
 package org.FORM;
 
+import java.io.File;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -8,6 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class personalInfoController {
 	@FXML
@@ -38,16 +43,24 @@ public class personalInfoController {
 	private Label lblImagePath;
 	@FXML
 	private ImageView imgviImage;
-	
+
+	@FXML
 	public void uploadPersonalInfo() {
-		
+
 	}
-	public void cancelWindow() {
-		
+
+	@FXML
+	public void cancelWindow(ActionEvent event) {
+		((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
 	}
-	public void uploadImage() {
-		
+
+	@FXML
+	public void uploadImage(ActionEvent event) {
+		FileChooser imageChooser = new FileChooser();
+		File image = imageChooser.showOpenDialog(null);
+		if (image != null) {
+			lblImagePath.setText(image.getAbsolutePath());
+		}
 	}
-	
-	
+
 }

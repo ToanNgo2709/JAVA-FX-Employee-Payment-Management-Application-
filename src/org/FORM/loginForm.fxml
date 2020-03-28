@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="210.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.FORM.loginController">
+<AnchorPane prefHeight="210.0" prefWidth="344.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.FORM.loginController">
    <children>
       <AnchorPane layoutX="-157.0" layoutY="-149.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="34.0" layoutY="52.0" text="Username: " />
@@ -23,5 +23,6 @@
             <Button fx:id="btnGoToRegister" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#goToRegister" text="Register" />
         </buttons>
       </ButtonBar>
+      <Label fx:id="lblShowPW" layoutX="232.0" layoutY="125.0" prefHeight="17.0" prefWidth="98.0" />
    </children>
 </AnchorPane>

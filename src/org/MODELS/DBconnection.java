@@ -1,33 +1,43 @@
 package org.MODELS;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBconnection {
-	private static String DB_URL = "jdbc:sqlserver://localhost:1433;" + "databaseName=EMPLOYEE_PAYMENT_MANAGEMENT;" + "integratedSecurity=true";
-	private static String USER_NAME = "sa";
-	private static String PW = "sa";
-	
-	public static void main(String args[])
-	{
-		try {
-			Connection conn = getConnection(DB_URL,USER_NAME,PW);
-			Statement stmt = conn.createStatement();
-			conn.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private static String url = "jdbc:sqlserver://localhost:1433;user=sa;password=sa";
+
+	private void DBConnection() {
+
 	}
-	
-	private static Connection getConnection(String dB_URL2, String uSER_NAME2, String pW2) {
-		Connection conn = null;
+
+	public static final Connection Connect() {
 		try {
+			Connection conn;
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn = DriverManager.getConnection(dB_URL2,uSER_NAME2,pW2);
-			System.out.println("Connect successfully");
-		} catch (Exception e) {
-			System.out.println("Connect Failure");
+			conn = DriverManager.getConnection(url);
+			return conn;
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return conn;
+		return null;
+	}
+
+	public static final ResultSet Query(String strQuery) {
+		Statement stmt;
+		try {
+			stmt = Connect().createStatement();
+			ResultSet rs = stmt.executeQuery(strQuery);
+			return rs;
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

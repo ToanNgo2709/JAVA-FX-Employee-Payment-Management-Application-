@@ -18,14 +18,14 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="140.0" layoutY="80.0" prefHeight="25.0" prefWidth="193.0" />
-      <TextField layoutX="140.0" layoutY="121.0" prefHeight="25.0" prefWidth="193.0" />
-      <PasswordField layoutX="140.0" layoutY="160.0" prefHeight="25.0" prefWidth="193.0" />
+      <TextField fx:id="tfEmployeeID" layoutX="140.0" layoutY="80.0" prefHeight="25.0" prefWidth="193.0" />
+      <TextField fx:id="tfUsername" layoutX="140.0" layoutY="121.0" prefHeight="25.0" prefWidth="193.0" />
+      <PasswordField fx:id="pfPW" layoutX="140.0" layoutY="160.0" prefHeight="25.0" prefWidth="193.0" />
       <Label layoutX="60.0" layoutY="202.0" text="Re_enter Password:" />
-      <PasswordField layoutX="184.0" layoutY="198.0" prefHeight="25.0" prefWidth="185.0" />
+      <PasswordField fx:id="pfRePW" layoutX="184.0" layoutY="198.0" prefHeight="25.0" prefWidth="185.0" />
       <ButtonBar layoutX="121.0" layoutY="259.0" prefHeight="40.0" prefWidth="311.0">
         <buttons>
-            <Button fx:id="btnRegister" mnemonicParsing="false" text="Register" />
+            <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#Register" text="Register" />
             <Button fx:id="btnCancel" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
             <Button fx:id="btnBackToLogin" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#goToLogin" text="Back to Login" />
         </buttons>

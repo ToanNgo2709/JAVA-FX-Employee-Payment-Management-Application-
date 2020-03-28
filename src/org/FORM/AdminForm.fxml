@@ -5,21 +5,23 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.FORM.AdminController">
    <children>
-      <MenuBar>
+      <MenuBar fx:id="myMenubar">
        <menus>
-                <Menu mnemonicParsing="false" text="Manager Registration" />
+                <Menu mnemonicParsing="false" text="Manager">
+               <items>
+                  <MenuItem fx:id="mnitManagerRegistration" mnemonicParsing="false" onAction="#openManagerRegistration" text="Registration" />
+                  <MenuItem fx:id="mnitPaymentManager" mnemonicParsing="false" onAction="#openPaymentManager" text="Payment" />
+               </items></Menu>
                 <Menu mnemonicParsing="false" text="Add">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Leave Types" />
-                        <MenuItem mnemonicParsing="false" text="Project" />
+                        <MenuItem fx:id="mnitAddProject" mnemonicParsing="false" onAction="#openAddProject" text="Project" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Payment Manager" />
                   <Menu mnemonicParsing="false" text="Misc">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Sign out" />
+                        <MenuItem fx:id="mnitSignout" mnemonicParsing="false" onAction="#signOut" text="Sign out" />
                      </items>
                   </Menu>
               </menus>
