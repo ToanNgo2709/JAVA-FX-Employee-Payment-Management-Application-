@@ -31,12 +31,11 @@ public class employeeUIController {
 	public void openPersonInfo(ActionEvent event) {
 
 		try {
-			Parent PerInfoViewPane = FXMLLoader.load(getClass().getResource("personalInfoForm.fxml"));
-			Scene PerInfoViewScene = new Scene(PerInfoViewPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(PerInfoViewScene);
-			window.setMaximized(true);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("personalInfoForm.fxml"));
+			Parent perInfoViewPane = (Parent) loader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(perInfoViewPane));
+			stage.show();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,11 +45,11 @@ public class employeeUIController {
 	@FXML
 	public void openAddWork(ActionEvent event) {
 		try {
-			Parent AddWorkPane = FXMLLoader.load(getClass().getResource("AddWorkForm.fxml"));
-			Scene AddWorkScene = new Scene(AddWorkPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(AddWorkScene);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("AddWorkForm.fxml"));
+			Parent openAddWordPane = (Parent) loader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(openAddWordPane));
+			stage.show();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -60,11 +59,11 @@ public class employeeUIController {
 	@FXML
 	public void openManagerWork(ActionEvent event) {
 		try {
-			Parent ManagerWorkPane = FXMLLoader.load(getClass().getResource("EmployeeWorkManagerForm.fxml"));
-			Scene ManagerWorkScene = new Scene(ManagerWorkPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(ManagerWorkScene);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeWorkManagerForm.fxml"));
+			Parent openManagerWordPane = (Parent) loader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(openManagerWordPane));
+			stage.show();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -74,13 +73,13 @@ public class employeeUIController {
 	@FXML
 	public void openAddLeave(ActionEvent event) {
 		try {
-			Parent AddLeavePane = FXMLLoader.load(getClass().getResource("AddLeaveForm.fxml"));
-			Scene AddLeaveScene = new Scene(AddLeavePane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(AddLeaveScene);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("AddLeaveForm.fxml"));
+			Parent addLeaveViewPane = (Parent) loader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(addLeaveViewPane));
+			stage.show();
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -88,11 +87,11 @@ public class employeeUIController {
 	@FXML
 	public void openManagerLeave(ActionEvent event) {
 		try {
-			Parent ManagerLeavePane = FXMLLoader.load(getClass().getResource("LeaveHistoryForm.fxml"));
-			Scene ManagerLeaveScene = new Scene(ManagerLeavePane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(ManagerLeaveScene);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaveHistoryForm.fxml"));
+			Parent openManagerLeaveViewPane = (Parent) loader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(openManagerLeaveViewPane));
+			stage.show();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -102,11 +101,11 @@ public class employeeUIController {
 	@FXML
 	public void openSeePayment(ActionEvent event) {
 		try {
-			Parent SeePaymentPane = FXMLLoader.load(getClass().getResource("SeePaymentForm.fxml"));
-			Scene SeePaymentScene = new Scene(SeePaymentPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(SeePaymentScene);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("SeePaymentForm.fxml"));
+			Parent openSeePaymentPane = (Parent) loader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(openSeePaymentPane));
+			stage.show();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

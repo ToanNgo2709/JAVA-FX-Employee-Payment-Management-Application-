@@ -23,15 +23,14 @@ public class AdminController {
 
 	@FXML
 	public void openManagerRegistration(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistrationManagerForm.fxml"));
 		try {
-			Parent ManagerRegistrationPane = FXMLLoader.load(getClass().getResource("RegistrationManagerForm.fxml"));
-			Scene ManagerRegistrationScene = new Scene(ManagerRegistrationPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(ManagerRegistrationScene);
-			window.setMaximized(true);
-			window.show();
+			Parent root = (Parent) loader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.show();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}

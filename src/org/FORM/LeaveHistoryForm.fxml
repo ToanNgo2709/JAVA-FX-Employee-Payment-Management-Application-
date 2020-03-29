@@ -7,12 +7,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.FORM.LeaveHistoryController">
    <children>
-      <TableView layoutX="14.0" layoutY="14.0" prefHeight="466.0" prefWidth="732.0">
+      <TableView fx:id="myTable" layoutX="14.0" layoutY="14.0" prefHeight="466.0" prefWidth="732.0">
         <columns>
-          <TableColumn prefWidth="143.0" text="Leave Types" />
-          <TableColumn prefWidth="82.0" text="Number" />
-            <TableColumn prefWidth="420.0" text="Reason" />
-            <TableColumn prefWidth="85.0" text="Status" />
+          <TableColumn fx:id="colType" prefWidth="143.0" text="Leave Types" />
+          <TableColumn fx:id="colNoHour" prefWidth="82.0" text="Number" />
+            <TableColumn fx:id="colReason" prefWidth="420.0" text="Reason" />
+            <TableColumn fx:id="colStatus" prefWidth="85.0" text="Status" />
         </columns>
       </TableView>
       <Button fx:id="btnClose" layoutX="287.0" layoutY="499.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="151.0" text="Close" />

@@ -24,5 +24,6 @@
         </buttons>
       </ButtonBar>
       <Label fx:id="lblShowPW" layoutX="232.0" layoutY="125.0" prefHeight="17.0" prefWidth="98.0" />
+      <Label fx:id="lblNotification" layoutX="34.0" layoutY="25.0" prefHeight="17.0" prefWidth="294.0" />
    </children>
 </AnchorPane>

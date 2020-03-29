@@ -12,8 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -36,6 +34,8 @@ public class loginController {
 	private PasswordField pfPW;
 	@FXML
 	private Label lblShowPW;
+	@FXML
+	private Label lblNotification;
 
 	@FXML
 	public void goToRegister(ActionEvent event) throws IOException {
@@ -54,18 +54,24 @@ public class loginController {
 		// open Employee Scene when login with Employee Account;
 		String strQuery = "SELECT * FROM EMPLOYEE WHERE Approve_status = 'Yes'";
 		ResultSet rs = DBconnection.Query(strQuery);
-		while (rs.next()) {
+		while (rs != null && rs.next()) {
 			if (username.equals(rs.getString("Username")) && pw.equals(rs.getString("PW"))) {
 				try {
-					Parent employeeViewPane = FXMLLoader.load(getClass().getResource("employeeUIForm.fxml"));
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("employeeUIForm.fxml"));
+					Parent employeeViewPane = (Parent) loader.load();
 					Scene employeeViewScene = new Scene(employeeViewPane);
+
+//					LoginPersonalInfoParseData getData = new LoginPersonalInfoParseData(rs.getString("ID"),
+//							rs.getString("Username"), rs.getString("PW"));
+
 					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					window.setScene(employeeViewScene);
 					window.setMaximized(true);
 					window.show();
-				} catch (Exception e) {
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+
 				}
 				// open Admin Scene when login with Admin Account;
 			} else if (username.equals("sa") && pw.equals("sa")) {
@@ -81,13 +87,8 @@ public class loginController {
 					e.printStackTrace();
 				}
 			} else {
-				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Error");
-				alert2.setHeaderText("Can't login to application");
-				alert2.setContentText("The account is not registered,not approved or does not exist");
-				alert2.showAndWait();
-				tfUsername.setText("");
-				pfPW.setText("");
+				lblNotification.setText("Account not approval or not exist");
+				lblNotification.setStyle("-fx-text-fill: red");
 			}
 		}
 		DBconnection.Connect().close();

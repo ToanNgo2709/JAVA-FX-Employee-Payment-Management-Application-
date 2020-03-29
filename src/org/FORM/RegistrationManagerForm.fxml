@@ -15,6 +15,8 @@
             <TableColumn fx:id="colStatus" prefWidth="153.0" text="Status" />
         </columns>
       </TableView>
-      <Button fx:id="btnClose" layoutX="330.0" layoutY="629.0" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+      <Button fx:id="btnClose" layoutX="409.0" layoutY="629.0" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+      <Button fx:id="btnOpenRow" layoutX="208.0" layoutY="629.0" mnemonicParsing="false" onAction="#openRegistrationApprove" prefHeight="25.0" prefWidth="158.0" text="Open row information" />
+      <Button fx:id="btnRefresh" layoutX="114.0" layoutY="629.0" mnemonicParsing="false" onAction="#refreshTable" text="Refresh" />
    </children>
 </AnchorPane>

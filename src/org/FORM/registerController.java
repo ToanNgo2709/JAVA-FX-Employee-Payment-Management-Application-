@@ -60,7 +60,6 @@ public class registerController {
 	@FXML
 	public void Register() {
 		try {
-			String EmID = tfEmployeeID.getText();
 			String username = tfUsername.getText();
 			String sqlQuery = "SELECT Username FROM EMPLOYEE";
 			ResultSet rs = DBconnection.Query(sqlQuery);
@@ -98,16 +97,6 @@ public class registerController {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-//		try {
-//			if (pfPW.getText().equals(pfRePW.getText()) == false) {
-//				
-//			} else {
-//				
-//			}
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
 
 	}
 
