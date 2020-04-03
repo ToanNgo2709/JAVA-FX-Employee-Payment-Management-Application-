@@ -93,7 +93,6 @@ public class employeeUIController {
 			stage.setScene(new Scene(openManagerLeaveViewPane));
 			stage.show();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
@@ -107,7 +106,6 @@ public class employeeUIController {
 			stage.setScene(new Scene(openSeePaymentPane));
 			stage.show();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
@@ -117,13 +115,13 @@ public class employeeUIController {
 		Stage stage = (Stage) myMenubar.getScene().getWindow();
 		stage.close();
 		try {
-			Parent LoginPane = FXMLLoader.load(getClass().getResource("loginForm.fxml"));
-			Scene LoginScene = new Scene(LoginPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(LoginScene);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("loginForm.fxml"));
+			Parent signOutPane = (Parent) loader.load();
+			Stage stage2 = new Stage();
+			stage2.setTitle("Login");
+			stage2.setScene(new Scene(signOutPane));
+			stage2.show();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -3,8 +3,12 @@ package org.FORM;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -55,6 +59,52 @@ public class personalInfoController implements Initializable {
 	@FXML
 	private ImageView imgviImage;
 	private FileInputStream fis;
+
+	public void pullPersonalInfo() {
+		String id = null;
+		String Query = "SELECT * FROM EMPLOYEE WHERE ID = " + id;
+		ResultSet rs = DBconnection.Query(Query);
+
+	}
+
+	@FXML
+	public void showPersonalInFo(ActionEvent event) {
+		String username = tfUsername.getText();
+		String query = "SELECT * FROM EMPLOYEE WHERE Username LIKE " + "'" + username + "'";
+		ResultSet rs = DBconnection.Query(query);
+		try {
+			while (rs.next()) {
+				tfEmployeeID.setText(rs.getString("ID"));
+				tfName.setText(rs.getString("Name"));
+				pfPW.setText(rs.getString("PW"));
+				tfDOB.setText(rs.getString("DOB"));
+				taPerAdd.setText(rs.getString("Permanent_Address"));
+				taCurAdd.setText(rs.getString("Current_Address"));
+				tfPhone.setText(rs.getString("Phone"));
+				tfEmail.setText(rs.getString("Email"));
+
+				// retrive image
+				InputStream input = rs.getBinaryStream("Image");
+				InputStreamReader inputReader = new InputStreamReader(input);
+				if (inputReader.ready()) {
+					File tempFile = new File("tempFile.jpg");
+					@SuppressWarnings("resource")
+					FileOutputStream fos = new FileOutputStream(tempFile);
+					byte[] buffer = new byte[1024];
+					while (input.read(buffer) > 0) {
+						fos.write(buffer);
+					}
+					Image image = new Image(tempFile.toURI().toURL().toString());
+					imgviImage.setImage(image);
+				}
+
+				DBconnection.Connect().close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
 
 	@FXML
 	public void uploadPersonalInfo(ActionEvent event) throws FileNotFoundException {
@@ -116,6 +166,12 @@ public class personalInfoController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public String getData(String id) {
+		tfName.setText(id);
+		return id;
 
 	}
 

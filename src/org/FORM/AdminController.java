@@ -1,5 +1,7 @@
 package org.FORM;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,29 +25,29 @@ public class AdminController {
 
 	@FXML
 	public void openManagerRegistration(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistrationManagerForm.fxml"));
 		try {
-			Parent root = (Parent) loader.load();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistrationManagerForm.fxml"));
+			Parent managerRegistrationViewPane = (Parent) loader.load();
 			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
+			stage.setScene(new Scene(managerRegistrationViewPane));
 			stage.show();
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	@FXML
 	public void openAddProject(ActionEvent event) {
 		try {
-			Parent AddProjectPane = FXMLLoader.load(getClass().getResource("AddProjectForm.fxml"));
-			Scene AddProjectScene = new Scene(AddProjectPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(AddProjectScene);
-			window.setMaximized(true);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProjectForm.fxml"));
+			Parent addProjectViewPane = (Parent) loader.load();
+			AddProjectController controller = loader.getController();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(addProjectViewPane));
+			stage.show();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -53,11 +55,11 @@ public class AdminController {
 	@FXML
 	public void openPaymentManager(ActionEvent event) {
 		try {
-			Parent PaymentManagerPane = FXMLLoader.load(getClass().getResource("PaymentManagerForm.fxml"));
-			Scene PaymentManagerScene = new Scene(PaymentManagerPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(PaymentManagerScene);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PaymentManagerForm.fxml"));
+			Parent openPaymentViewPane = (Parent) loader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(openPaymentViewPane));
+			stage.show();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,13 +71,13 @@ public class AdminController {
 		Stage stage = (Stage) myMenubar.getScene().getWindow();
 		stage.close();
 		try {
-			Parent LoginPane = FXMLLoader.load(getClass().getResource("loginForm.fxml"));
-			Scene LoginScene = new Scene(LoginPane);
-			Stage window = (Stage) myMenubar.getScene().getWindow();
-			window.setScene(LoginScene);
-			window.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("loginForm.fxml"));
+			Parent signOutPane = (Parent) loader.load();
+			Stage stage1 = new Stage();
+			stage1.setScene(new Scene(signOutPane));
+			stage1.show();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 

@@ -82,6 +82,7 @@ public class loginController {
 					window.setScene(adminViewScene);
 					window.setMaximized(true);
 					window.show();
+					break;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
