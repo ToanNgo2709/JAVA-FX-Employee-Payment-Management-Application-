@@ -60,12 +60,9 @@ public class loginController {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("employeeUIForm.fxml"));
 					Parent employeeViewPane = (Parent) loader.load();
 					Scene employeeViewScene = new Scene(employeeViewPane);
-
-//					LoginPersonalInfoParseData getData = new LoginPersonalInfoParseData(rs.getString("ID"),
-//							rs.getString("Username"), rs.getString("PW"));
-
 					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					window.setScene(employeeViewScene);
+					window.setTitle("Employee");
 					window.setMaximized(true);
 					window.show();
 				} catch (IOException e) {

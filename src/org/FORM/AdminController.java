@@ -43,7 +43,6 @@ public class AdminController {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProjectForm.fxml"));
 			Parent addProjectViewPane = (Parent) loader.load();
-			AddProjectController controller = loader.getController();
 			Stage stage = new Stage();
 			stage.setScene(new Scene(addProjectViewPane));
 			stage.show();

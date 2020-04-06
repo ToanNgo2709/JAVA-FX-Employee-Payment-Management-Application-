@@ -60,13 +60,6 @@ public class personalInfoController implements Initializable {
 	private ImageView imgviImage;
 	private FileInputStream fis;
 
-	public void pullPersonalInfo() {
-		String id = null;
-		String Query = "SELECT * FROM EMPLOYEE WHERE ID = " + id;
-		ResultSet rs = DBconnection.Query(Query);
-
-	}
-
 	@FXML
 	public void showPersonalInFo(ActionEvent event) {
 		String username = tfUsername.getText();
@@ -121,8 +114,9 @@ public class personalInfoController implements Initializable {
 			prep.setString(8, tfPhone.getText());
 			prep.setString(9, tfEmail.getText());
 
+			File image = uploadImage();
 			// INSERT IMAGE
-			fis = new FileInputStream(uploadImage(event));
+			fis = new FileInputStream(image);
 			prep.setBinaryStream(10, fis);
 
 			prep.executeUpdate();
@@ -143,7 +137,7 @@ public class personalInfoController implements Initializable {
 	}
 
 	@FXML
-	public File uploadImage(ActionEvent event) {
+	public File uploadImage() {
 		FileChooser imageChooser = new FileChooser();
 		File imageFile = imageChooser.showOpenDialog(null);
 		if (imageFile != null) {
@@ -166,7 +160,6 @@ public class personalInfoController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public String getData(String id) {

@@ -47,6 +47,7 @@ public class AddWorkController implements Initializable {
 
 		String selectID = "SELECT * FROM CLIENT INNER JOIN PROJECT ON Client.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID WHERE Client_Name = "
 				+ "'" + getClientValue + "'";
+		ResultSet rs = DBconnection.Query(selectID);
 
 	}
 

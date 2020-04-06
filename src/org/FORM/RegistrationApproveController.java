@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -30,6 +31,8 @@ public class RegistrationApproveController implements Initializable {
 	private TextField tfPW;
 	@FXML
 	private CheckBox ckbStatus;
+	@FXML
+	private Button btnDelete;
 
 	@FXML
 	public void closeWindow(ActionEvent event) {
@@ -38,7 +41,6 @@ public class RegistrationApproveController implements Initializable {
 
 	@FXML
 	public void registrationApprove(ActionEvent event) throws SQLException {
-		String ID = tfEmID.getText();
 		String status;
 		if (ckbStatus.isSelected()) {
 			status = "Yes";
@@ -54,6 +56,27 @@ public class RegistrationApproveController implements Initializable {
 		alert.setTitle("successful");
 		alert.showAndWait();
 		DBconnection.Connect().close();
+	}
+
+	@FXML
+	public void deleteRegistration(ActionEvent event) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setContentText("Are you sure to delete this user");
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.YES) {
+			try {
+
+				String query = "DELETE FROM EMPLOYEE WHERE ID = ?";
+				PreparedStatement prep = DBconnection.Connect().prepareStatement(query);
+				prep.setString(1, tfEmID.getText());
+				prep.execute();
+				DBconnection.Connect().close();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	@Override

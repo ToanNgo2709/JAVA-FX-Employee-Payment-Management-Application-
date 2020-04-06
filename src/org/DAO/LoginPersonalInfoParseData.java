@@ -1,29 +1,20 @@
 package org.DAO;
 
 public class LoginPersonalInfoParseData {
-	private String EmID, userName, pw;
+	private String username, pw;
 
-	public LoginPersonalInfoParseData(String emID, String userName, String pw) {
+	public LoginPersonalInfoParseData(String username, String pw) {
 		super();
-		EmID = emID;
-		this.userName = userName;
+		this.username = username;
 		this.pw = pw;
 	}
 
-	public String getEmID() {
-		return EmID;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmID(String emID) {
-		EmID = emID;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPw() {

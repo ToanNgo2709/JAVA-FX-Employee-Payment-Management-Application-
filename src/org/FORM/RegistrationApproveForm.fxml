@@ -17,6 +17,7 @@
       <TextField fx:id="tfPW" editable="false" layoutX="115.0" layoutY="120.0" />
       <CheckBox fx:id="ckbStatus" layoutX="477.0" layoutY="83.0" mnemonicParsing="false" />
       <Button fx:id="btnRegApp" layoutX="158.0" layoutY="181.0" mnemonicParsing="false" onAction="#registrationApprove" text="Registration Approve" />
-      <Button fx:id="btnCancel" layoutX="338.0" layoutY="181.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+      <Button fx:id="btnCancel" layoutX="435.0" layoutY="181.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+      <Button fx:id="btnDelete" layoutX="328.0" layoutY="181.0" mnemonicParsing="false" onAction="#deleteRegistration" prefHeight="25.0" prefWidth="70.0" text="Delete" />
    </children>
 </AnchorPane>
