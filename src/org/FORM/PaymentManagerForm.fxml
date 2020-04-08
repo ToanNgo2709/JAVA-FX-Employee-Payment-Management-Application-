@@ -7,16 +7,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.FORM.PaymentManagerController">
    <children>
-      <TableView layoutX="6.0" layoutY="8.0" prefHeight="579.0" prefWidth="748.0">
+      <TableView fx:id="myTable" layoutX="6.0" layoutY="8.0" prefHeight="579.0" prefWidth="748.0">
         <columns>
-          <TableColumn prefWidth="99.0" text="Employee ID" />
-          <TableColumn prefWidth="142.0" text="Name" />
-            <TableColumn prefWidth="81.0" text="Worktime" />
-            <TableColumn prefWidth="61.0" text="Offtime" />
-            <TableColumn prefWidth="107.0" text="Wages" />
-            <TableColumn prefWidth="88.0" text="Tax" />
-            <TableColumn prefWidth="110.0" text="Total" />
-            <TableColumn prefWidth="59.0" text="Approve" />
+          <TableColumn fx:id="colId" prefWidth="99.0" text="Employee ID" />
+          <TableColumn fx:id="colName" prefWidth="142.0" text="Name" />
+            <TableColumn fx:id="colWorkTime" prefWidth="81.0" text="Worktime" />
+            <TableColumn fx:id="colOfftime" prefWidth="61.0" text="Offtime" />
+            <TableColumn fx:id="colWages" prefWidth="107.0" text="Wages" />
+            <TableColumn fx:id="colTax" prefWidth="88.0" text="Tax" />
+            <TableColumn fx:id="colTotal" prefWidth="110.0" text="Total" />
+            <TableColumn fx:id="colApprove" prefWidth="59.0" text="Approve" />
         </columns>
       </TableView>
       <Button fx:id="btnPrint" layoutX="203.0" layoutY="600.0" mnemonicParsing="false" onAction="#Print" prefHeight="25.0" prefWidth="101.0" text="Print" />

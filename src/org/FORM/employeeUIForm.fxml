@@ -23,7 +23,7 @@
                 <Menu mnemonicParsing="false" text="Leave">
                   <items>
                     <MenuItem fx:id="mnitAddLeave" mnemonicParsing="false" onAction="#openAddLeave" text="Add Leave" />
-                        <MenuItem fx:id="mnitManagerLeave" mnemonicParsing="false" onAction="#openManagerLeave" text="Manager Leave" />
+                        <MenuItem fx:id="mnitManagerLeave" mnemonicParsing="false" onAction="#openManagerLeave" text="Leave History" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Payment">

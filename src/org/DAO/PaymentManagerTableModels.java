@@ -1,10 +1,11 @@
 package org.DAO;
 
 public class PaymentManagerTableModels {
-	String id, name;
+	int id;
+	String name;
 	float workTime, offTime, wages, tax, Total;
 
-	public PaymentManagerTableModels(String id, String name, float workTime, float offTime, float wages, float tax,
+	public PaymentManagerTableModels(int id, String name, float workTime, float offTime, float wages, float tax,
 			float total) {
 		super();
 		this.id = id;
@@ -16,11 +17,11 @@ public class PaymentManagerTableModels {
 		Total = total;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

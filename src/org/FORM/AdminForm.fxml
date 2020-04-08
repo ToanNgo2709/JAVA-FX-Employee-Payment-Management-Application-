@@ -13,6 +13,7 @@
                <items>
                   <MenuItem fx:id="mnitManagerRegistration" mnemonicParsing="false" onAction="#openManagerRegistration" text="Registration" />
                   <MenuItem fx:id="mnitPaymentManager" mnemonicParsing="false" onAction="#openPaymentManager" text="Payment" />
+                  <MenuItem fx:id="mnitLeaveManager" mnemonicParsing="false" onAction="#openLeaveManager" text="Leave" />
                </items></Menu>
                 <Menu mnemonicParsing="false" text="Add">
                   <items>

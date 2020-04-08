@@ -2,6 +2,7 @@ package org.FORM;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.DAO.ManagerWorkTableModel;
@@ -52,19 +53,25 @@ public class EmployeeWorkManagerController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		String username = "toan158n";
+		String query2 = "SELECT ID FROM EMPLOYEE WHERE Username = " + "'" + username + "'";
+		ResultSet rs2 = DBconnection.Query(query2);
 		try {
-			String query = "SELECT * FROM CLIENT INNER JOIN PROJECT ON CLIENT.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID";
-			ResultSet rs = DBconnection.Query(query);
-			while (rs.next()) {
-				oblist.add(new ManagerWorkTableModel(rs.getString("Client_Name"), rs.getString("Project_name"),
-						rs.getString("Task_Name"), rs.getString("Task_Comment"), rs.getString("Task_Status"),
-						rs.getFloat("Task_NoHour")));
+			while (rs2.next()) {
+				int id = rs2.getInt("ID");
+				String query = "SELECT * FROM CLIENT INNER JOIN PROJECT ON CLIENT.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID WHERE Employee_ID ="
+						+ id;
+				ResultSet rs = DBconnection.Query(query);
+				while (rs.next()) {
+					oblist.add(new ManagerWorkTableModel(rs.getString("Client_Name"), rs.getString("Project_name"),
+							rs.getString("Task_Name"), rs.getString("Task_Comment"), rs.getString("Task_Status"),
+							rs.getFloat("Task_NoHour")));
 
+				}
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		colClient.setCellValueFactory(new PropertyValueFactory<>("client_name"));
 		colProject.setCellValueFactory(new PropertyValueFactory<>("project_name"));

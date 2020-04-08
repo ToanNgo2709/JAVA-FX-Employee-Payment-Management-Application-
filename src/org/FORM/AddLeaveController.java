@@ -1,6 +1,7 @@
 package org.FORM;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import org.MODELS.DBconnection;
 
@@ -28,10 +29,18 @@ public class AddLeaveController {
 	@FXML
 	private Button btnCancel;
 
+	public String username;
+
+	public void getUsername(String username1) {
+		username = username1;
+	}
+
 	@FXML
 	public void requestToAdmin(ActionEvent event) {
 		try {
-			String sqlQuery = "INSERT INTO LEAVE(Type_Name,No_Hour,Reason,Leave_Status) VALUES (?,?,?,?)";
+			String getID = "SELECT ID FROM EMPLOYEE WHERE Username LIKE " + "'" + username + "'";
+			ResultSet rs = DBconnection.Query(getID);
+			String sqlQuery = "INSERT INTO LEAVE(Type_Name,No_Hour,Reason,Leave_Status,Employee_ID) VALUES (?,?,?,?,?)";
 			PreparedStatement prep = DBconnection.Connect().prepareStatement(sqlQuery);
 			String type = null;
 			if (rdbHours.isSelected()) {
@@ -39,11 +48,15 @@ public class AddLeaveController {
 			} else if (rdbDays.isSelected()) {
 				type = "Days";
 			}
-			prep.setString(1, type);
-			prep.setFloat(2, Float.parseFloat(tfNoToRequest.getText()));
-			prep.setString(3, taReason.getText());
-			prep.setString(4, "No");
-			prep.executeUpdate();
+			while (rs.next()) {
+				int id = rs.getInt("ID");
+				prep.setString(1, type);
+				prep.setFloat(2, Float.parseFloat(tfNoToRequest.getText()));
+				prep.setString(3, taReason.getText());
+				prep.setString(4, "No");
+				prep.setInt(5, id);
+				prep.executeUpdate();
+			}
 			Alert leaveConfirm = new Alert(AlertType.CONFIRMATION);
 			leaveConfirm.setTitle("Notification");
 			leaveConfirm.setContentText("Request succesful");
@@ -51,6 +64,7 @@ public class AddLeaveController {
 			DBconnection.Connect().close();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

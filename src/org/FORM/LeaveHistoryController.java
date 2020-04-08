@@ -34,6 +34,12 @@ public class LeaveHistoryController implements Initializable {
 	@FXML
 	private TableColumn<LeaveHistoryTableModels, String> colStatus;
 
+	String username;
+
+	public void getUsername(String username) {
+
+	}
+
 	@FXML
 	public void closeWindow(ActionEvent event) {
 		((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
@@ -43,17 +49,24 @@ public class LeaveHistoryController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		ResultSet rs = DBconnection.Query("SELECT * FROM LEAVE");
+		String username = "toan158n";
+		String query = "SELECT * FROM EMPLOYEE WHERE Username = " + "'" + username + "'";
+		ResultSet r2 = DBconnection.Query(query);
+
 		try {
-			while (rs.next()) {
-				oblist.add(new LeaveHistoryTableModels(rs.getString("Type_Name"), rs.getString("Reason"),
-						rs.getString("Leave_Status"), rs.getFloat("No_Hour")));
+			while (r2.next()) {
+				int id = r2.getInt("ID");
+				ResultSet rs = DBconnection.Query("SELECT * FROM LEAVE WHERE Employee_ID =" + id);
+				while (rs.next()) {
+					oblist.add(new LeaveHistoryTableModels(rs.getString("Type_Name"), rs.getString("Reason"),
+							rs.getString("Leave_Status"), rs.getFloat("No_Hour")));
+				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO: handle exception
 			e.printStackTrace();
 		}
+
 		colType.setCellValueFactory(new PropertyValueFactory<>("type"));
 		colNoHour.setCellValueFactory(new PropertyValueFactory<>("noHour"));
 		colReason.setCellValueFactory(new PropertyValueFactory<>("reason"));

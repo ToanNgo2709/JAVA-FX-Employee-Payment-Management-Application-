@@ -3,6 +3,7 @@ package org.FORM;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.DAO.SeePaymentTableModels;
@@ -50,45 +51,39 @@ public class SeePaymentController implements Initializable {
 
 	ObservableList<SeePaymentTableModels> oblist = FXCollections.observableArrayList();
 
-	public void confirmSendToAdmin(ActionEvent event) {
-		try {
-			String insertToPayment = "INSERT INTO PAYMENT(Wage,Tax,Total,Offtime) VALUES (?,?,?,?)";
-			PreparedStatement prep = DBconnection.Connect().prepareStatement(insertToPayment);
-			prep.setFloat(1, Float.parseFloat(tfWages.getText()));
-			prep.setFloat(2, Float.parseFloat(tfTax.getText()));
-			prep.setFloat(3, Float.parseFloat(tfToTal.getText()));
-			prep.setFloat(4, Float.parseFloat(tfOfftime.getText()));
-			prep.executeUpdate();
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setContentText("Do you want to confirm it to Admin");
-			alert.showAndWait();
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-
-	}
-
 	public void closeWindow(ActionEvent event) {
 		((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
 	}
 
 	float wages = 0;
+	float workTime = 0;
+	String username;
+
+	public void getUsername(String username1) {
+		username = username1;
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		String username = "toan158n";
+		String query = "SELECT * FROM EMPLOYEE WHERE Username =" + "'" + username + "'";
+		ResultSet rs2 = DBconnection.Query(query);
 		try {
-			String retriveDB = "SELECT * FROM CLIENT INNER JOIN PROJECT ON CLIENT.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID";
-			ResultSet rs = DBconnection.Query(retriveDB);
-			while (rs.next()) {
-				oblist.add(new SeePaymentTableModels(rs.getString("Client_Name"), rs.getString("Project_Name"),
-						rs.getString("Task_Name"), rs.getFloat("Task_NoHour"), rs.getInt("Task_PayPerHours")));
-				wages += (rs.getFloat("Task_NoHour") * rs.getInt("Task_PayPerHours"));
+			while (rs2.next()) {
+				int id = rs2.getInt("ID");
+				String retriveDB = "SELECT * FROM CLIENT INNER JOIN PROJECT ON CLIENT.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID WHERE TASK.Employee_ID ="
+						+ id;
+				ResultSet rs = DBconnection.Query(retriveDB);
+				while (rs.next()) {
+					oblist.add(new SeePaymentTableModels(rs.getString("Client_Name"), rs.getString("Project_Name"),
+							rs.getString("Task_Name"), rs.getFloat("Task_NoHour"), rs.getInt("Task_PayPerHours")));
+					wages += (rs.getFloat("Task_NoHour") * rs.getInt("Task_PayPerHours"));
+					workTime += rs.getFloat("Task_NoHour");
+				}
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		tfWages.setText(Float.toString(wages));
 		float tax = (wages / 100) * 10;
@@ -103,13 +98,44 @@ public class SeePaymentController implements Initializable {
 		myTable.setItems(oblist);
 
 		try {
-			String retriveLeave = "SELECT * FROM LEAVE";
-			ResultSet rs = DBconnection.Query(retriveLeave);
-			float time = 0;
-			while (rs.next()) {
-				time += rs.getFloat("No_Hour");
+			String query2 = "SELECT * FROM EMPLOYEE WHERE Username = " + "'" + username + "'";
+			ResultSet rs3 = DBconnection.Query(query2);
+			while (rs3.next()) {
+				int id = rs3.getInt("ID");
+				String retriveLeave = "SELECT * FROM LEAVE WHERE Employee_ID =" + id;
+				ResultSet rs = DBconnection.Query(retriveLeave);
+				float time = 0;
+				while (rs.next()) {
+					time += rs.getFloat("No_Hour");
+				}
+				tfOfftime.setText(Float.toString(time));
 			}
-			tfOfftime.setText(Float.toString(time));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void confirmSendToAdmin(ActionEvent event) {
+		String query = "SELECT * FROM EMPLOYEE WHERE Username = " + "'" + username + "'";
+		ResultSet rs = DBconnection.Query(query);
+		String insertToPayment = "INSERT INTO PAYMENT(Wage,Tax,Total,Offtime,Worktime,Employee_ID) VALUES (?,?,?,?,?,?)";
+
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("ID");
+				PreparedStatement prep = DBconnection.Connect().prepareStatement(insertToPayment);
+				prep.setFloat(1, Float.parseFloat(tfWages.getText()));
+				prep.setFloat(2, Float.parseFloat(tfTax.getText()));
+				prep.setFloat(3, Float.parseFloat(tfToTal.getText()));
+				prep.setFloat(4, Float.parseFloat(tfOfftime.getText()));
+				prep.setFloat(5, workTime);
+				prep.setInt(6, id);
+				prep.executeUpdate();
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setContentText("Do you want to confirm it to Admin");
+				alert.showAndWait();
+
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

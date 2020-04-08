@@ -17,6 +17,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class loginController {
@@ -41,7 +42,6 @@ public class loginController {
 	public void goToRegister(ActionEvent event) throws IOException {
 		Parent registerViewPane = FXMLLoader.load(getClass().getResource("registerForm.fxml"));
 		Scene registerViewScene = new Scene(registerViewPane);
-
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(registerViewScene);
 		window.show();
@@ -60,7 +60,12 @@ public class loginController {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("employeeUIForm.fxml"));
 					Parent employeeViewPane = (Parent) loader.load();
 					Scene employeeViewScene = new Scene(employeeViewPane);
+
+					employeeUIController controller = loader.getController();
+					controller.getData(username);
+
 					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					window.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
 					window.setScene(employeeViewScene);
 					window.setTitle("Employee");
 					window.setMaximized(true);
@@ -76,6 +81,8 @@ public class loginController {
 					Parent adminViewPane = FXMLLoader.load(getClass().getResource("AdminForm.fxml"));
 					Scene adminViewScene = new Scene(adminViewPane);
 					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					window.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
+					window.setTitle("Admin");
 					window.setScene(adminViewScene);
 					window.setMaximized(true);
 					window.show();

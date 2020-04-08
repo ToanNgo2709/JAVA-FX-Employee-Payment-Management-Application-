@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.MODELS.DBconnection;
@@ -60,16 +59,60 @@ public class personalInfoController implements Initializable {
 	private ImageView imgviImage;
 	private FileInputStream fis;
 
+	public String usernameInfo;
+
+	public void getUsername(String username1) {
+		usernameInfo = username1;
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle resourceBundle) {
+		try {
+			String query = "SELECT * FROM EMPLOYEE WHERE Username LIKE " + "'" + usernameInfo + "'";
+			ResultSet rs = DBconnection.Query(query);
+			while (rs.next()) {
+				tfEmployeeID.setText(rs.getString("ID"));
+				tfUsername.setText(rs.getString("Username"));
+				tfName.setText(rs.getString("Name"));
+				pfPW.setText(rs.getString("PW"));
+				tfDOB.setText(rs.getString("DOB"));
+				taPerAdd.setText(rs.getString("Permanent_Address"));
+				taCurAdd.setText(rs.getString("Current_Address"));
+				tfPhone.setText(rs.getString("Phone"));
+				tfEmail.setText(rs.getString("Email"));
+
+				// retrieve image
+				InputStream input = rs.getBinaryStream("Image");
+				InputStreamReader inputReader = new InputStreamReader(input);
+				if (inputReader.ready()) {
+					File tempFile = new File("tempFile.jpg");
+					@SuppressWarnings("resource")
+					FileOutputStream fos = new FileOutputStream(tempFile);
+					byte[] buffer = new byte[1024];
+					while (input.read(buffer) > 0) {
+						fos.write(buffer);
+					}
+					Image image = new Image(tempFile.toURI().toURL().toString());
+					imgviImage.setImage(image);
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+	}
+
 	@FXML
 	public void showPersonalInFo(ActionEvent event) {
-		String username = tfUsername.getText();
-		String query = "SELECT * FROM EMPLOYEE WHERE Username LIKE " + "'" + username + "'";
+		String query = "SELECT * FROM EMPLOYEE WHERE Username LIKE " + "'" + this.usernameInfo + "'";
 		ResultSet rs = DBconnection.Query(query);
 		try {
 			while (rs.next()) {
 				tfEmployeeID.setText(rs.getString("ID"));
 				tfName.setText(rs.getString("Name"));
 				pfPW.setText(rs.getString("PW"));
+				tfUsername.setText(rs.getString("Username"));
 				tfDOB.setText(rs.getString("DOB"));
 				taPerAdd.setText(rs.getString("Permanent_Address"));
 				taCurAdd.setText(rs.getString("Current_Address"));
@@ -101,32 +144,38 @@ public class personalInfoController implements Initializable {
 
 	@FXML
 	public void uploadPersonalInfo(ActionEvent event) throws FileNotFoundException {
+		String query = "SELECT * FROM EMPLOYEE WHERE Username = " + "'" + this.usernameInfo + "'";
+		ResultSet rs = DBconnection.Query(query);
 		try {
-			String sqlQuery = "INSERT INTO EMPLOYEE(ID,Name,Username,PW,DOB,Permanent_Address,Current_Address,Phone,Email,Image,Approve_status) VALUES (?,?,?,?,?,?,?,?,?,?,'Yes')";
-			PreparedStatement prep = DBconnection.Connect().prepareStatement(sqlQuery);
-			prep.setString(1, tfEmployeeID.getText());
-			prep.setString(2, tfName.getText());
-			prep.setString(3, tfUsername.getText());
-			prep.setString(4, pfPW.getText());
-			prep.setString(5, tfDOB.getText());
-			prep.setString(6, taPerAdd.getText());
-			prep.setString(7, taCurAdd.getText());
-			prep.setString(8, tfPhone.getText());
-			prep.setString(9, tfEmail.getText());
+			while (rs.next()) {
+				int id = rs.getInt("ID");
+				String update = "UPDATE EMPLOYEE SET Name = ?,DOB =?,Permanent_Address=?,Current_Address=?,Phone = ?,Email = ?,Image = ?,Approve_status = 'Yes' WHERE ID = "
+						+ id;
+				PreparedStatement prep = DBconnection.Connect().prepareStatement(update);
+				prep.setString(1, tfName.getText());
+				prep.setString(2, tfDOB.getText());
+				prep.setString(3, taPerAdd.getText());
+				prep.setString(4, taCurAdd.getText());
+				prep.setString(5, tfPhone.getText());
+				prep.setString(6, tfEmail.getText());
 
-			File image = uploadImage();
-			// INSERT IMAGE
-			fis = new FileInputStream(image);
-			prep.setBinaryStream(10, fis);
+				FileChooser imageChooser = new FileChooser();
+				File imageFile = imageChooser.showOpenDialog(null);
+				Image image = new Image(imageFile.toURI().toString());
+				imgviImage.setImage(image);
+				// INSERT IMAGE
+				fis = new FileInputStream(imageFile);
+				prep.setBinaryStream(7, fis);
+				prep.executeUpdate();
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Thành công");
+				alert.showAndWait();
 
-			prep.executeUpdate();
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Thành công");
-			alert.showAndWait();
+			}
+
 			DBconnection.Connect().close();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
@@ -134,38 +183,6 @@ public class personalInfoController implements Initializable {
 	@FXML
 	public void cancelWindow(ActionEvent event) {
 		((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
-	}
-
-	@FXML
-	public File uploadImage() {
-		FileChooser imageChooser = new FileChooser();
-		File imageFile = imageChooser.showOpenDialog(null);
-		if (imageFile != null) {
-			lblImagePath.setText(imageFile.getAbsolutePath());
-			Image image = new Image(imageFile.toURI().toString());
-			imgviImage.setImage(image);
-		}
-		return imageFile;
-
-	}
-
-//	public void initData(LoginPersonalInfoParseData person) {
-//		loginedPerson = person;
-//		tfEmployeeID.setText(loginedPerson.getEmID());
-//		tfUsername.setText(loginedPerson.getUserName());
-//		pfPW.setText(loginedPerson.getPw());
-//
-//	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-	}
-
-	public String getData(String id) {
-		tfName.setText(id);
-		return id;
-
 	}
 
 }
