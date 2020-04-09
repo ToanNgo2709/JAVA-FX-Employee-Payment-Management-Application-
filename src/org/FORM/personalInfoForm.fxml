@@ -27,7 +27,6 @@
       <TextField fx:id="tfPhone" layoutX="83.0" layoutY="343.0" prefHeight="25.0" prefWidth="182.0" />
       <TextField fx:id="tfEmail" layoutX="83.0" layoutY="382.0" prefHeight="25.0" prefWidth="182.0" />
       <ImageView fx:id="imgviImage" fitHeight="240.0" fitWidth="200.0" layoutX="387.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnUploadImage" layoutX="461.0" layoutY="319.0" mnemonicParsing="false" onAction="#showPersonalInFo" text="Get Infomation" />
       <Label fx:id="lblImagePath" layoutX="409.0" layoutY="364.0" prefHeight="17.0" prefWidth="182.0" text="" />
       <Button fx:id="btnUpload" layoutX="173.0" layoutY="433.0" mnemonicParsing="false" onAction="#uploadPersonalInfo" prefHeight="25.0" prefWidth="119.0" text="Update" />
       <Button fx:id="btnCancel" layoutX="321.0" layoutY="433.0" mnemonicParsing="false" onAction="#cancelWindow" text="Cancel" />

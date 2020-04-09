@@ -36,8 +36,12 @@ public class LeaveHistoryController implements Initializable {
 
 	String username;
 
-	public void getUsername(String username) {
+	public String getUsername() {
+		return username;
+	}
 
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@FXML
@@ -49,8 +53,11 @@ public class LeaveHistoryController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String username = "toan158n";
-		String query = "SELECT * FROM EMPLOYEE WHERE Username = " + "'" + username + "'";
+
+	}
+
+	public void initLeaveHistoryTable() {
+		String query = "SELECT * FROM EMPLOYEE WHERE Username = " + "'" + getUsername() + "'";
 		ResultSet r2 = DBconnection.Query(query);
 
 		try {

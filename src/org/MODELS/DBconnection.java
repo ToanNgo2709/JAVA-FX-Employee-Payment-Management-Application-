@@ -9,10 +9,6 @@ import java.sql.Statement;
 public class DBconnection {
 	private static String url = "jdbc:sqlserver://localhost:1433;user=sa;password=sa";
 
-	private void DBConnection() {
-
-	}
-
 	public static final Connection Connect() {
 		try {
 			Connection conn;

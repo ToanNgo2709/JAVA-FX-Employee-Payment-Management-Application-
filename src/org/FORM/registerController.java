@@ -27,8 +27,6 @@ public class registerController {
 	@FXML
 	private Button btnBackToLogin;
 	@FXML
-	private TextField tfEmployeeID;
-	@FXML
 	private TextField tfUsername;
 	@FXML
 	private PasswordField pfPW;
@@ -70,6 +68,7 @@ public class registerController {
 					alertAlreadyExist.setHeaderText("Can't register");
 					alertAlreadyExist.setContentText("Account already exists");
 					alertAlreadyExist.showAndWait();
+					break;
 				} else if (pfPW.getText().equals(pfRePW.getText()) == false) {
 					Alert notMatchPW = new Alert(AlertType.WARNING);
 					notMatchPW.setTitle("Error");
@@ -80,17 +79,17 @@ public class registerController {
 					pfRePW.setText("");
 				} else {
 					PreparedStatement prep = DBconnection.Connect()
-							.prepareStatement("INSERT INTO EMPLOYEE (ID,Username,PW,Approve_status) VALUES (?,?,?,?)");
-					prep.setString(1, tfEmployeeID.getText());
-					prep.setString(2, tfUsername.getText());
-					prep.setString(3, pfPW.getText());
-					prep.setString(4, "No");
+							.prepareStatement("INSERT INTO EMPLOYEE (Username,PW,Approve_status) VALUES (?,?,?)");
+					prep.setString(1, tfUsername.getText());
+					prep.setString(2, pfPW.getText());
+					prep.setString(3, "No");
 					prep.executeUpdate();
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Register");
 					alert.setHeaderText("Register Successfully");
 					alert.setContentText("Please wait for admin approval to login ");
 					alert.showAndWait();
+					break;
 				}
 			}
 		} catch (Exception e) {

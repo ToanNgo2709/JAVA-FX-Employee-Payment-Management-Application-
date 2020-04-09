@@ -47,7 +47,8 @@ public class employeeUIController implements Initializable {
 			Stage stage = new Stage();
 			stage.setScene(new Scene(perInfoViewPane));
 			personalInfoController controller = loader.getController();
-			controller.getUsername(this.username);
+			controller.setUsernameInfo(this.username);
+			controller.InitDB();
 			stage.setTitle("Personal Infomation");
 			stage.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
 			stage.show();
@@ -63,10 +64,14 @@ public class employeeUIController implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("AddWorkForm.fxml"));
 			Parent openAddWordPane = (Parent) loader.load();
 			Stage stage = new Stage();
+			AddWorkController controller = loader.getController();
+			controller.setUsernameInfo(this.username);
+			controller.initAddWork();
 			stage.setScene(new Scene(openAddWordPane));
 			stage.setTitle("Add work");
 			stage.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
 			stage.show();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -79,6 +84,9 @@ public class employeeUIController implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeWorkManagerForm.fxml"));
 			Parent openManagerWordPane = (Parent) loader.load();
 			Stage stage = new Stage();
+			EmployeeWorkManagerController controller = loader.getController();
+			controller.setUsername(this.username);
+			controller.initManagerWorkTable();
 			stage.setScene(new Scene(openManagerWordPane));
 			stage.setTitle("Manager Work");
 			stage.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
@@ -113,6 +121,9 @@ public class employeeUIController implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaveHistoryForm.fxml"));
 			Parent openManagerLeaveViewPane = (Parent) loader.load();
 			Stage stage = new Stage();
+			LeaveHistoryController controller = loader.getController();
+			controller.setUsername(this.username);
+			controller.initLeaveHistoryTable();
 			stage.setScene(new Scene(openManagerLeaveViewPane));
 			stage.setTitle("Manager Leave");
 			stage.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
@@ -131,7 +142,8 @@ public class employeeUIController implements Initializable {
 			stage.setScene(new Scene(openSeePaymentPane));
 			stage.setTitle("See Payment");
 			SeePaymentController controller = loader.getController();
-			controller.getUsername(this.username);
+			controller.setUsername(this.username);
+			controller.initSeePaymentTable();
 			stage.getIcons().add(new Image("org\\MULTIMEDIA\\iconfinder_People_132775.png"));
 			stage.show();
 		} catch (Exception e) {

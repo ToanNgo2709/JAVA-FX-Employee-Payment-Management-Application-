@@ -38,6 +38,15 @@ public class EmployeeWorkManagerController implements Initializable {
 	private TableColumn<ManagerWorkTableModel, String> colComment;
 	@FXML
 	private TableColumn<ManagerWorkTableModel, String> colStatus;
+	public String username;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	ObservableList<ManagerWorkTableModel> oblist = FXCollections.observableArrayList();
 
@@ -53,13 +62,16 @@ public class EmployeeWorkManagerController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String username = "toan158n";
-		String query2 = "SELECT ID FROM EMPLOYEE WHERE Username = " + "'" + username + "'";
+
+	}
+
+	public void initManagerWorkTable() {
+		String query2 = "SELECT ID FROM EMPLOYEE WHERE Username = " + "'" + getUsername() + "'";
 		ResultSet rs2 = DBconnection.Query(query2);
 		try {
 			while (rs2.next()) {
 				int id = rs2.getInt("ID");
-				String query = "SELECT * FROM CLIENT INNER JOIN PROJECT ON CLIENT.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID WHERE Employee_ID ="
+				String query = "SELECT * FROM CLIENT INNER JOIN PROJECT ON CLIENT.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID INNER JOIN WORK ON TASK.ID = WORK.Task_ID WHERE Employee_ID ="
 						+ id;
 				ResultSet rs = DBconnection.Query(query);
 				while (rs.next()) {

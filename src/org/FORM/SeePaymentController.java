@@ -59,19 +59,26 @@ public class SeePaymentController implements Initializable {
 	float workTime = 0;
 	String username;
 
-	public void getUsername(String username1) {
-		username = username1;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String username = "toan158n";
-		String query = "SELECT * FROM EMPLOYEE WHERE Username =" + "'" + username + "'";
+
+	}
+
+	public void initSeePaymentTable() {
+		String query = "SELECT * FROM EMPLOYEE WHERE Username =" + "'" + getUsername() + "'";
 		ResultSet rs2 = DBconnection.Query(query);
 		try {
 			while (rs2.next()) {
 				int id = rs2.getInt("ID");
-				String retriveDB = "SELECT * FROM CLIENT INNER JOIN PROJECT ON CLIENT.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID WHERE TASK.Employee_ID ="
+				String retriveDB = "SELECT * FROM CLIENT INNER JOIN PROJECT ON CLIENT.ID = PROJECT.Client_ID INNER JOIN TASK ON PROJECT.ID = TASK.Project_ID INNER JOIN WORK ON TASK.ID = WORK.Task_ID WHERE Employee_ID ="
 						+ id;
 				ResultSet rs = DBconnection.Query(retriveDB);
 				while (rs.next()) {

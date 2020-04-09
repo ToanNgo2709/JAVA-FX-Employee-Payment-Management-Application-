@@ -18,7 +18,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="tfEmployeeID" layoutX="140.0" layoutY="80.0" prefHeight="25.0" prefWidth="193.0" />
       <TextField fx:id="tfUsername" layoutX="140.0" layoutY="121.0" prefHeight="25.0" prefWidth="193.0" />
       <PasswordField fx:id="pfPW" layoutX="140.0" layoutY="160.0" prefHeight="25.0" prefWidth="193.0" />
       <Label layoutX="60.0" layoutY="202.0" text="Re_enter Password:" />

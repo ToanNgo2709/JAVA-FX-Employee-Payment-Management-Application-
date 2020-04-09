@@ -75,7 +75,6 @@ public class loginController {
 					e.printStackTrace();
 
 				}
-				// open Admin Scene when login with Admin Account;
 			} else if (username.equals("sa") && pw.equals("sa")) {
 				try {
 					Parent adminViewPane = FXMLLoader.load(getClass().getResource("AdminForm.fxml"));

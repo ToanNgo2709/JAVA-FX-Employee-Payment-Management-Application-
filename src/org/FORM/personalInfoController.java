@@ -61,14 +61,22 @@ public class personalInfoController implements Initializable {
 
 	public String usernameInfo;
 
-	public void getUsername(String username1) {
-		usernameInfo = username1;
+	public String getUsernameInfo() {
+		return usernameInfo;
+	}
+
+	public void setUsernameInfo(String usernameInfo) {
+		this.usernameInfo = usernameInfo;
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle resourceBundle) {
+	public void initialize(URL location, ResourceBundle resourceBundle) {
+
+	}
+
+	public void InitDB() {
 		try {
-			String query = "SELECT * FROM EMPLOYEE WHERE Username LIKE " + "'" + usernameInfo + "'";
+			String query = "SELECT * FROM EMPLOYEE WHERE Username LIKE " + "'" + getUsernameInfo() + "'";
 			ResultSet rs = DBconnection.Query(query);
 			while (rs.next()) {
 				tfEmployeeID.setText(rs.getString("ID"));
@@ -100,12 +108,11 @@ public class personalInfoController implements Initializable {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-
 	}
 
 	@FXML
 	public void showPersonalInFo(ActionEvent event) {
-		String query = "SELECT * FROM EMPLOYEE WHERE Username LIKE " + "'" + this.usernameInfo + "'";
+		String query = "SELECT * FROM EMPLOYEE WHERE Username LIKE " + "'" + getUsernameInfo() + "'";
 		ResultSet rs = DBconnection.Query(query);
 		try {
 			while (rs.next()) {
