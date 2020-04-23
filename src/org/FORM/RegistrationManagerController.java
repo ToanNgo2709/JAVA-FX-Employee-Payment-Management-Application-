@@ -67,7 +67,6 @@ public class RegistrationManagerController implements Initializable {
 		colPassword.setCellValueFactory(new PropertyValueFactory<>("pw"));
 		colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 		myTable.setItems(oblist);
-
 	}
 
 	@FXML

@@ -19,7 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class registerController {
-
+	@FXML
+	private TextField tfFullName;
 	@FXML
 	private Button btnRegister;
 	@FXML
@@ -78,11 +79,12 @@ public class registerController {
 					pfPW.setText("");
 					pfRePW.setText("");
 				} else {
-					PreparedStatement prep = DBconnection.Connect()
-							.prepareStatement("INSERT INTO EMPLOYEE (Username,PW,Approve_status) VALUES (?,?,?)");
+					PreparedStatement prep = DBconnection.Connect().prepareStatement(
+							"INSERT INTO EMPLOYEE (Username,PW,Approve_status,Name) VALUES (?,?,?,?)");
 					prep.setString(1, tfUsername.getText());
 					prep.setString(2, pfPW.getText());
 					prep.setString(3, "No");
+					prep.setString(4, tfFullName.getText());
 					prep.executeUpdate();
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Register");
